@@ -13,7 +13,7 @@ public class NimbusTokenDecoderTests {
 
     @Test
     public void test_decode_throws_ifNoKeySetUriWasSet() {
-        TokenDecoder tokenDecoder = new NimbusTokenDecoder();
+        VariableKeySetUriTokenDecoder tokenDecoder = new NimbusTokenDecoder();
         
         assertThatThrownBy(() -> {
             tokenDecoder.decode("abced");

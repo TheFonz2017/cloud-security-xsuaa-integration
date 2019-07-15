@@ -24,7 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class ClientCredentialsTokenFlowTests {
     
     private RestTemplate restTemplate;
-    private TokenDecoder tokenDecoder;
+    private VariableKeySetUriTokenDecoder tokenDecoder;
     private TokenDecoderMock tokenDecoderMock;
     private Jwt mockJwt;
     private String clientId = "clientId";

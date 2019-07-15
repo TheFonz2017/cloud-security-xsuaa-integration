@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.sap.cloud.security.xsuaa.tokenflows.NimbusTokenDecoder;
-import com.sap.cloud.security.xsuaa.tokenflows.TokenDecoder;
+import com.sap.cloud.security.xsuaa.tokenflows.VariableKeySetUriTokenDecoder;
 import com.sap.cloud.security.xsuaa.tokenflows.XsuaaTokenFlows;
 
 @RunWith(SpringRunner.class)
@@ -40,8 +40,8 @@ public class XsuaaDefaultConfigurationsTests {
     @Test
     public final void test_xsuaaTokenDecoder() {
         assertThat(context.getBean("xsuaaTokenDecoder")).isNotNull();
-        assertThat(context.getBean("xsuaaTokenDecoder")).isInstanceOf(TokenDecoder.class);
-        assertThat(context.getBean(TokenDecoder.class)).isNotNull(); 
+        assertThat(context.getBean("xsuaaTokenDecoder")).isInstanceOf(VariableKeySetUriTokenDecoder.class);
+        assertThat(context.getBean(VariableKeySetUriTokenDecoder.class)).isNotNull(); 
     }
 
     @Test
@@ -77,16 +77,16 @@ public class XsuaaDefaultConfigurationsTests {
         contextRunner.withUserConfiguration(UserConfiguration.class)
         .run((context) -> {
             assertThat(context).hasSingleBean(XsuaaTokenFlows.class);
-            assertThat(context).hasSingleBean(TokenDecoder.class);
+            assertThat(context).hasSingleBean(VariableKeySetUriTokenDecoder.class);
             assertThat(context).hasSingleBean(RestTemplate.class);
             
             UserConfiguration customConfig = context.getBean(UserConfiguration.class);
             XsuaaTokenFlows expectedCustomTokenFlows = customConfig.userDefinedXsuaaTokenFlows(customConfig.userDefinedXsuaaTokenFlowRestTemplate(), customConfig.userDefinedXsuaaTokenDecoder());
-            TokenDecoder expectedCustomTokenDecoder = customConfig.userDefinedXsuaaTokenDecoder();
+            VariableKeySetUriTokenDecoder expectedCustomTokenDecoder = customConfig.userDefinedXsuaaTokenDecoder();
             RestTemplate expectedCustomRestTemplate = customConfig.userDefinedXsuaaTokenFlowRestTemplate();
             
             assertThat(context.getBean(XsuaaTokenFlows.class)).isSameAs(expectedCustomTokenFlows);
-            assertThat(context.getBean(TokenDecoder.class)).isSameAs(expectedCustomTokenDecoder);
+            assertThat(context.getBean(VariableKeySetUriTokenDecoder.class)).isSameAs(expectedCustomTokenDecoder);
             assertThat(context.getBean(RestTemplate.class)).isSameAs(expectedCustomRestTemplate);
         });
     }
@@ -95,12 +95,12 @@ public class XsuaaDefaultConfigurationsTests {
     public static class UserConfiguration {
         
         @Bean
-        public XsuaaTokenFlows userDefinedXsuaaTokenFlows(RestTemplate restTemplate, TokenDecoder decoder) {
+        public XsuaaTokenFlows userDefinedXsuaaTokenFlows(RestTemplate restTemplate, VariableKeySetUriTokenDecoder decoder) {
             return new XsuaaTokenFlows(restTemplate, decoder);
         }
         
         @Bean
-        public TokenDecoder userDefinedXsuaaTokenDecoder() {
+        public VariableKeySetUriTokenDecoder userDefinedXsuaaTokenDecoder() {
             return new NimbusTokenDecoder();
         }
         

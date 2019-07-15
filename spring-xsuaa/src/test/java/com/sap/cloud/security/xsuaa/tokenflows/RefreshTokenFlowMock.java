@@ -17,11 +17,11 @@ public class RefreshTokenFlowMock extends RefreshTokenFlow {
         this.mockJwt = mockJwt;
     }
     
-    public RefreshTokenFlowMock(RestTemplate restTemplate, TokenDecoder tokenDecoder, URI xsuaaBaseUri) {
+    public RefreshTokenFlowMock(RestTemplate restTemplate, VariableKeySetUriTokenDecoder tokenDecoder, URI xsuaaBaseUri) {
         super(restTemplate, tokenDecoder, xsuaaBaseUri);
     }
 
-    public RefreshTokenFlowMock(RestTemplate restTemplate, TokenDecoder tokenDecoder, URI tokenEndpoint, URI authorizeEndpoint, URI keySetEndpoint) {
+    public RefreshTokenFlowMock(RestTemplate restTemplate, VariableKeySetUriTokenDecoder tokenDecoder, URI tokenEndpoint, URI authorizeEndpoint, URI keySetEndpoint) {
         super(restTemplate, tokenDecoder, tokenEndpoint, authorizeEndpoint, keySetEndpoint);
     }
     

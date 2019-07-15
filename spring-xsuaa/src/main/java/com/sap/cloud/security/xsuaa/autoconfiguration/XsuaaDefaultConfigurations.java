@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoderJwkSupport;
 import org.springframework.web.client.RestTemplate;
 
 import com.sap.cloud.security.xsuaa.tokenflows.NimbusTokenDecoder;
-import com.sap.cloud.security.xsuaa.tokenflows.TokenDecoder;
+import com.sap.cloud.security.xsuaa.tokenflows.VariableKeySetUriTokenDecoder;
 import com.sap.cloud.security.xsuaa.tokenflows.XsuaaTokenFlows;
 
 /**
@@ -22,19 +22,19 @@ public class XsuaaDefaultConfigurations {
 
     @Bean
     @ConditionalOnMissingBean
-    public XsuaaTokenFlows xsuaaTokenFlows(RestTemplate restTemplate, TokenDecoder decoder) {
+    public XsuaaTokenFlows xsuaaTokenFlows(RestTemplate restTemplate, VariableKeySetUriTokenDecoder decoder) {
         return new XsuaaTokenFlows(restTemplate, decoder);
     }
     
     /**
-     * Creates a {@link TokenDecoder} instance 
+     * Creates a {@link VariableKeySetUriTokenDecoder} instance 
      * based on a {@link NimbusJwtDecoderJwkSupport} 
      * implementation. 
-     * @return the {@link TokenDecoder} instance.
+     * @return the {@link VariableKeySetUriTokenDecoder} instance.
      */
     @Bean
     @ConditionalOnMissingBean
-    public TokenDecoder xsuaaTokenDecoder() {
+    public VariableKeySetUriTokenDecoder xsuaaTokenDecoder() {
         return new NimbusTokenDecoder();
     }
     

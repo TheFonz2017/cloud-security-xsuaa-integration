@@ -21,7 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class RefreshTokenFlowTests {
     
     private RestTemplate restTemplate;
-    private TokenDecoder tokenDecoder;
+    private VariableKeySetUriTokenDecoder tokenDecoder;
     private String refreshToken;
     
     private TokenDecoderMock tokenDecoderMock;

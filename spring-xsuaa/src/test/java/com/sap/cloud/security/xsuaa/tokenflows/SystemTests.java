@@ -13,7 +13,7 @@ public class SystemTests {
 
     private static final Logger logger = LoggerFactory.getLogger(SystemTests.class);
     private RestTemplate restTemplate;
-    private TokenDecoder tokenDecoder;
+    private VariableKeySetUriTokenDecoder tokenDecoder;
     
     @Before
     public void setup() {

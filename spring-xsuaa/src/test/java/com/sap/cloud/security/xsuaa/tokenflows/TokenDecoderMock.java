@@ -7,9 +7,9 @@ import java.net.URI;
 
 import org.springframework.security.oauth2.jwt.Jwt;
 
-import com.sap.cloud.security.xsuaa.tokenflows.TokenDecoder;
+import com.sap.cloud.security.xsuaa.tokenflows.VariableKeySetUriTokenDecoder;
 
-public class TokenDecoderMock implements TokenDecoder {
+public class TokenDecoderMock implements VariableKeySetUriTokenDecoder {
 
     boolean setJwksURICalled;
     boolean decodeCalled;
