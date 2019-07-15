@@ -29,7 +29,8 @@ import com.sap.cloud.security.xsuaa.autoconfiguration.XsuaaResourceServerJwkConf
 public class XsuaaResourceServerJwkConfigurationTests {
 
     // create an ApplicationContextRunner that will create a context with the configuration under test.
-    private final ApplicationContextRunner contextRunner = new ApplicationContextRunner().withConfiguration(AutoConfigurations.of(OAuth2ResourceServerPropertiesExposing.class, 
+    private final ApplicationContextRunner contextRunner = new ApplicationContextRunner().withConfiguration(AutoConfigurations.of(OAuth2ResourceServerPropertiesExposing.class,
+                                                                                                                                  XsuaaDefaultConfigurations.class,
                                                                                                                                   XsuaaResourceServerJwkConfiguration.class));
     @Test
     public final void test_constructor() {
@@ -64,6 +65,7 @@ public class XsuaaResourceServerJwkConfigurationTests {
     public final void test_jwtDecoderByIssuerUri() {
         
         ApplicationContextRunner contextRunner = new ApplicationContextRunner().withConfiguration(AutoConfigurations.of(OAuth2ResourceServerPropertiesExposing.class, 
+                                                                                                                        XsuaaDefaultConfigurations.class,
                                                                                                                         XsuaaResourceServerJwkConfigurationSubclass.class));
         // positive test: jwk-set-uri is set. Should provide a bean.
         contextRunner.withPropertyValues("spring.security.oauth2.resourceserver.jwt.issuer-uri=https://authentication.eu10.hana.ondemand.com")

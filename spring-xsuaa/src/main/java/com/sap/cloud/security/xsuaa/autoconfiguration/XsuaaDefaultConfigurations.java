@@ -34,7 +34,7 @@ public class XsuaaDefaultConfigurations {
      */
     @Bean
     @ConditionalOnMissingBean
-    public VariableKeySetUriTokenDecoder xsuaaTokenDecoder() {
+    public VariableKeySetUriTokenDecoder xsuaaTokenFlowsTokenDecoder() {
         return new NimbusTokenDecoder();
     }
     

@@ -39,8 +39,8 @@ public class XsuaaDefaultConfigurationsTests {
     
     @Test
     public final void test_xsuaaTokenDecoder() {
-        assertThat(context.getBean("xsuaaTokenDecoder")).isNotNull();
-        assertThat(context.getBean("xsuaaTokenDecoder")).isInstanceOf(VariableKeySetUriTokenDecoder.class);
+        assertThat(context.getBean("xsuaaTokenFlowsTokenDecoder")).isNotNull();
+        assertThat(context.getBean("xsuaaTokenFlowsTokenDecoder")).isInstanceOf(VariableKeySetUriTokenDecoder.class);
         assertThat(context.getBean(VariableKeySetUriTokenDecoder.class)).isNotNull(); 
     }
 
@@ -59,7 +59,7 @@ public class XsuaaDefaultConfigurationsTests {
         //       as a result of Jwt.class being missing from the classpath.
         contextRunner.run((context) -> {
                          assertThat(context).hasBean("xsuaaTokenFlows");
-                         assertThat(context).hasBean("xsuaaTokenDecoder");
+                         assertThat(context).hasBean("xsuaaTokenFlowsTokenDecoder");
                          assertThat(context).hasBean("xsuaaTokenFlowRestTemplate");
                       });
         
@@ -67,7 +67,7 @@ public class XsuaaDefaultConfigurationsTests {
         contextRunner.withClassLoader(new FilteredClassLoader(Jwt.class)) // make sure Jwt.class is not on the classpath.
                      .run((context) -> {
                         assertThat(context).doesNotHaveBean("xsuaaTokenFlows");
-                        assertThat(context).doesNotHaveBean("xsuaaTokenDecoder");
+                        assertThat(context).doesNotHaveBean("xsuaaTokenFlowsTokenDecoder");
                         assertThat(context).doesNotHaveBean("xsuaaTokenFlowRestTemplate");
                       });
     }

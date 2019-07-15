@@ -2,7 +2,8 @@ package com.sap.cloud.security.xsuaa.tokenflows;
 
 import java.net.URI;
 
-import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtException;
 
 /**
  * Token decoder interface to provide for 
@@ -19,11 +20,20 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
  * a single Key Set URI, only. This interface defines an API for a
  * JwtDecoder which can be given changing key set URIs.
  */
-public interface VariableKeySetUriTokenDecoder extends JwtDecoder {
+public interface VariableKeySetUriTokenDecoder {
 
     /**
      * Sets the JWT Key Set URI.
      * @param keySetUri - the key set URI.
      */
     void setJwksURI(URI keySetUri);
+    
+    /**
+     * Decodes the JWT from it's compact claims representation format and returns a {@link Jwt}.
+     *
+     * @param token the JWT value
+     * @return a {@link Jwt}
+     * @throws JwtException if an error occurs while attempting to decode the JWT
+     */
+    Jwt decode(String token) throws JwtException;
 }
